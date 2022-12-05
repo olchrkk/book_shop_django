@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="form-signin text-center container">
+
+  {% if form.errors %}
+
+    <div class="alert alert-danger">
+      <strong>Error!</strong> {{form.errors}}
+    </div>
+
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    <h1 class="h3 mb-3 fw-normal">Создать новый аккаунт</h1>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="floatingInput1" name="username" placeholder="Username">
+      <label for="floatingInput1">Введите Ваш ник</label>
+    </div>
+
+    <div class="form-floating">
+      <input type="email" class="form-control" id="floatingInput2" name="email" placeholder="Email">
+      <label for="floatingInput2">Введите электронную почту</label>
+    </div>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="floatingInput3" name="first_name" placeholder="Your name">
+      <label for="floatingInput3">Введите Ваше имя</label>
+    </div>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="floatingInput4" name="last_name" placeholder="Your surname">
+      <label for="floatingInput4">Введите Вашу фамилию</label>
+    </div>
+
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword1" placeholder="Password" name="password">
+      <label for="floatingPassword1">Введите пароль</label>
+    </div>
+
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword2" placeholder="Repeat your Password" name="password2">
+      <label for="floatingPassword2">Повторите Ваш пароль</label>
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Создать аккаунт</button>
+  </form>
+</main>
+{% endblock %}
