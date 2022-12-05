@@ -21,7 +21,7 @@ class Author(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=100)
     author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True)
-    summary = models.TextField(max_length=200, help_text="Enter a description of the book")
+    summary = models.TextField(max_length=500, help_text="Enter a description of the book")
     genre = models.ManyToManyField(Genre)
     price = models.FloatField()
     amount = models.IntegerField(default=0)
