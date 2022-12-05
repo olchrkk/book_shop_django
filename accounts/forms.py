@@ -17,4 +17,4 @@ class UserRegistrationForm(forms.ModelForm):
         data = self.cleaned_data
         if data['password'] != data['password2']:
             raise forms.ValidationError("Пароли не совпадают")
-        raise data['password2']
+        return data['password2']

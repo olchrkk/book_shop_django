@@ -17,3 +17,13 @@ class IndexView(TemplateView):
             'authorsCount': authorsCount
         }
         return render(request, self.template_name, params)
+
+class BookView(TemplateView):
+    template_name = 'catalog/book.html'
+
+    def get(self, request, id):
+        book = Book.objects.get(id=id)
+        params = {
+            'book': book
+        }
+        return render(request, self.template_name, params)
