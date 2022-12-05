@@ -1,3 +1,9 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView
+# from .models import
 
-# Create your views here.
+class RegistrationView(TemplateView):
+    template_name = 'accounts/registration.html'
+
+    def get(self, request):
+        return render(request, self.template_name)

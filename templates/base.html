@@ -38,7 +38,7 @@
                 <span class="px-4 text-white">Привет, {{ user.username }}!</span> <a type="button" class="btn btn-outline-light me-2" href="{% url 'logout' %}">Выйти</a>
                 {% else %}
               <a type="button" class="btn btn-outline-light me-2" href="{% url 'login' %}">Войти</a>
-              <a type="button" class="btn btn-warning" href="#">Зарегистрироваться</a>
+              <a type="button" class="btn btn-warning" href="{% url 'signup' %}">Зарегистрироваться</a>
                 {% endif %}
             </div>
           </div>
