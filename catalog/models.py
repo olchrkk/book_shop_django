@@ -17,6 +17,8 @@ class Author(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
+    def get_author_url(self):
+        return reverse('catalog-author', args=[self.first_name, self.last_name])
 
 class Book(models.Model):
     title = models.CharField(max_length=100)

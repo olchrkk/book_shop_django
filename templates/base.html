@@ -8,6 +8,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
     <style>
+    a {
+    text-decoration: none;
+    color: black;
+    }
+
+    a:hover {
+    color: grey;
+    }
+
     main {
     margin-left: auto;
     margin-right: auto;
@@ -27,10 +36,8 @@
     
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
               <li><a href="{% url 'catalog-index' %}" class="nav-link px-2 text-secondary">Главная</a></li>
-              <li><a href="#" class="nav-link px-2 text-white">Функции</a></li>
-              <li><a href="#" class="nav-link px-2 text-white">Ценообразование</a></li>
-              <li><a href="#" class="nav-link px-2 text-white">FAQ</a></li>
-              <li><a href="#" class="nav-link px-2 text-white">О нас</a></li>
+              <li><a href="{% url 'catalog-authors' %}" class="nav-link px-2 text-white">Авторы</a></li>
+              <li><a href="#" class="nav-link px-2 text-white">Жанры</a></li>
             </ul>
 
             <div class="text-end">
