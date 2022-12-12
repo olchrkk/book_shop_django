@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from .models import Book, Author
+from .models import Book, Author, Genre
 
 
 class IndexView(TemplateView):
@@ -51,3 +51,25 @@ class AuthorView(TemplateView):
         }
         return render(request, self.template_name, params)
 
+class GenresView(TemplateView):
+    template_name = 'catalog/genres.html'
+
+    def get(self, request):
+        genres = Genre.objects.all()
+        params = {
+            'genres': genres
+        }
+        return render(request, self.template_name, params)
+
+
+class GenreView(TemplateView):
+    template_name = 'catalog/index.html'
+
+    def get(self, request, name):
+        genre = Genre.objects.get(name=name)
+        books = Book.objects.filter(genre=genre)
+        params = {
+            'genre': genre,
+            'books': books
+        }
+        return render(request, self.template_name, params)

@@ -5,15 +5,15 @@
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-md-7 py-4">
-          <h4 class="text-white">Магазин «Академическая книга»</h4>
-          <p class="text-muted">Книжный магазин «Академическая книга» работает с 1998 года. Ассортимент нашего магазина насчитывает {{ booksCount }} наименований книг и {{ authorsCount }} авторов. Мы работаем напрямую с белорусскими и зарубежными издательствами, сотрудничаем с крупнейшими библиотеками и предприятиями республики.</p>
+          <h4 class="text-white">Shop "Academic book"</h4>
+          <p class="text-muted">Bookshop "Academic Book" has been operating since 1998. The range of our store has {{ booksCount }} book titles and {{ authorsCount }} authors. We work directly with Belarusian and foreign publishing houses, cooperate with the largest libraries and enterprises of the republic.</p>
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
-          <h4 class="text-white">Контакты</h4>
+          <h4 class="text-white">Contacts</h4>
           <ul class="list-unstyled">
-            <li><a href="#" class="text-white">Подписать на Twitter</a></li>
-            <li><a href="#" class="text-white">Лайк на Facebook</a></li>
-            <li><a href="#" class="text-white">Напишите мне/a&gt;</a></li><a href="#" class="text-white">
+            <li><a href="#" class="text-white">Follow on Twitter</a></li>
+            <li><a href="#" class="text-white">Like on Facebook</a></li>
+            <li><a href="#" class="text-white">Write to us</a></li><a href="#" class="text-white">
           </a></ul><a href="#" class="text-white">
         </a></div><a href="#" class="text-white">
       </a></div><a href="#" class="text-white">
@@ -22,7 +22,7 @@
   </a><div class="navbar navbar-dark bg-dark shadow-sm"><a href="#" class="text-white">
 </a><div class="container"><a href="#" class="text-white">
       </a><a href="#" class="navbar-brand d-flex align-items-center">
-        <strong>{% if author %} Каталог книг {{ author.last_name }}а {% else %} Каталог книг {% endif %}</strong>
+        <strong>{% if author %} {{ author.last_name }}'s Catalog {% elif genre %} {{genre}}'s Catalog {% else %} Book Catalog {% endif %}</strong>
       </a>
       <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Переключить навигацию">
         <span class="navbar-toggler-icon"></span>
@@ -32,21 +32,21 @@
 </header>
 <div class="album py-5 bg-light">
     <div class="container">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-5">
         {% for book in books %}
             <div class="col">
                 <div class="card shadow-sm">
-                    <svg class="bd-placeholder-img card-img-top" width="30%" height="500px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Эскиз" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Эскиз</text></svg>
+                   <img src="{{book.image.url}}" width="100%" height="300px">
                     <div class="card-body">
-                        <p class="card-text">Название книги: {{book.title}}</p>
-                        <a class="card-text" href="{{ author.get_author_url }}">Автор: {{book.author}}</a>
+                        <p class="card-text" style="font-size: 18px; text-align: center;"><b>{{book.title}}</b></p>
+                        <a class="card-text" href="{{ author.get_author_url }}" style="font-size: 13px;">Author: {{book.author}}</a>
                         <p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <a type="button" class="btn btn-outline-secondary" href="{{ book.get_book_url }}">Показать</a>
-                                <a type="button" class="btn btn-info">Добавить в корзину</a>
+                        <div class="">
+                            <div class="btn-group" style="width: 100%;">
+                                <a type="button" class="btn btn-outline-secondary" style="font-size: 14px;" href="{{ book.get_book_url }}">Show</a>
+                                <a type="button" class="btn btn-info" style="font-size: 15px;">Add to card</a>
                             </div>
-                            <span class="badge bg-success">{{book.price}}$</span>
+                            <span style="display: block; text-align: center; font-size: 20px;"><b>{{book.price}}$</b></span>
                         </div>
                     </div>
                 </div>

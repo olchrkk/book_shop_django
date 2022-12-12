@@ -4,29 +4,29 @@
 
   {% if form.errors %}
  <div class="alert alert-danger">
-   <strong>Ошибка!</strong> Неправильное имя пользователя или пароль. Пожалуйста, попробуйте еще раз.
+   <strong>Wrong!</strong> Wrong username or password. Please try again.
 </div>
   {% endif %}
 
   <form method="post">
     {% csrf_token %}
-    <h1 class="h3 mb-3 fw-normal">Пожалуйста, войдите</h1>
+    <h1 class="h3 mb-3 fw-normal"><b>Please, sing in</b></h1>
 
     <div class="form-floating">
       <input type="text" class="form-control" id="floatingInput" name="username" placeholder="username">
-      <label for="floatingInput">Имя пользователя</label>
+      <label for="floatingInput">User name</label>
     </div>
     <div class="form-floating">
       <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
-      <label for="floatingPassword">Пароль</label>
+      <label for="floatingPassword">Password</label>
     </div>
 
     <div class="checkbox mb-3">
       <label>
-        <a href="{% url 'password_reset' %}">Забыли пароль?</a>
+        <a href="{% url 'password_reset' %}">Forgot your password?</a>
       </label>
     </div>
-    <button class="w-100 btn btn-lg btn-info" type="submit">Войти</button>
+    <button class="w-100 btn btn-lg btn-info" type="submit"><b>Sing in</b></button>
     <p class="mt-5 mb-3 text-muted">© Olga K. inc.</p>
   </form>
 </main>
