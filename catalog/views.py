@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from .models import Book, Author, Genre
+from cart.cart import get_cart
 
 
 class IndexView(TemplateView):
@@ -16,6 +17,7 @@ class IndexView(TemplateView):
             'booksCount': booksCount,
             'authorsCount': authorsCount
         }
+        params = get_cart(request,params)
         return render(request, self.template_name, params)
 
 
@@ -27,6 +29,7 @@ class AuthorsView(TemplateView):
         params = {
             'authors': authors
         }
+        params = get_cart(request, params)
         return render(request, self.template_name, params)
 
 class BookView(TemplateView):
@@ -37,6 +40,7 @@ class BookView(TemplateView):
         params = {
             'book': book
         }
+        params = get_cart(request, params)
         return render(request, self.template_name, params)
 
 class AuthorView(TemplateView):
@@ -49,6 +53,7 @@ class AuthorView(TemplateView):
             'author': author,
             'books': books
         }
+        params = get_cart(request, params)
         return render(request, self.template_name, params)
 
 class GenresView(TemplateView):
@@ -59,6 +64,7 @@ class GenresView(TemplateView):
         params = {
             'genres': genres
         }
+        params = get_cart(request, params)
         return render(request, self.template_name, params)
 
 
@@ -72,6 +78,7 @@ class GenreView(TemplateView):
             'genre': genre,
             'books': books
         }
+        params = get_cart(request, params)
         return render(request, self.template_name, params)
 
 class SearchView(TemplateView):
@@ -85,8 +92,9 @@ class SearchView(TemplateView):
         # books_by_author = Book.objects.filter(author=search_author)
         result = books_by_title.union(books_by_summary, all=False)
         params = {
-            'books' : result
+            'books': result
         }
+        params = get_cart(request, params)
         return render(request, self.template_name, params)
 
 

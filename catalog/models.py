@@ -43,6 +43,9 @@ class Book(models.Model):
     def get_book_url(self):
         return reverse('catalog-book', args=[self.id])
 
+    def add_to_cart(self):
+        return reverse('cart-add', args=[self.id])
+
     display_genre.short_description = 'Genre'
 
 
