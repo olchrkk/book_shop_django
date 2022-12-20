@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js'></script>
+    <script type='text/javascript'
+            src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js'></script>
     <style>
     a {
     text-decoration: none;
@@ -22,68 +24,85 @@
     width: 30em;
     margin-top: 10%;
     }
+    .nav-item dropdown,
+    .dropdown:hover > .dropdown-menu {
+    display: block;
+    }
     </style>
-
 </head>
-<body >
-    <header class="p-3 bg-dark text-white">
-        <div class="container">
-          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+<body>
+<header class="p-3 bg-dark text-white">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-              <li><a href="{% url 'catalog-index' %}" class="nav-link px-2 text-secondary">Main page</a></li>
-              <li><a href="{% url 'catalog-authors' %}" class="nav-link px-2 text-white">Authors</a></li>
-              <li><a href="{% url 'catalog-genres' %}" class="nav-link px-2 text-white">Genres</a></li>
+                <li><a href="{% url 'catalog-index' %}" class="nav-link px-2 text-white">Main page</a></li>
+                <li><a href="{% url 'catalog-authors' %}" class="nav-link px-2 text-white">Authors</a></li>
+                <li class="nav-item dropdown">
+                    <a href="{% url 'catalog-genres' %}"><a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" style="color: white;">Genres</a></a>
+                    <ul class="dropdown-menu">
+                        {% for genre in genres %}
+                        <li><a class="dropdown-item" href="{{ genre.get_genre_url }}">{{genre}}</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
             </ul>
-              <form class="d-flex px-2" action="{% url 'catalog-search' %}" method='POST'>
-             {% csrf_token %}
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="content">
-              <button class="btn btn-outline-success" type="submit">Search</button>
+            <form class="d-flex px-2" action="{% url 'catalog-search' %}" method='POST'>
+                {% csrf_token %}
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="content">
+                <button class="btn btn-outline-warning" type="submit">Search</button>
             </form>
-              {% if user.is_authenticated %}
-              <div hidden >
+            {% if user.is_authenticated %}
+            <div hidden>
                 <div data-name="popover-content">
                     <table class="table table-hover">
-                      <tbody>
-                      {% for book in cart.products.all %}
+                        <tbody>
+                        {% for book in cart.products.all %}
                         <tr>
                             <td style="vertical-align: middle"><b>{{ book.title }}</b></td>
-                          <td style="vertical-align: middle"><b>{{ book.price }}</b></td>
-                          <td><img src="{{book.image.url}}" width="100%" height="95px"></td>
+                            <td style="vertical-align: middle"><b>{{ book.price }}</b></td>
+                            <td><img src="{{book.image.url}}" width="100%" height="95px"></td>
                         </tr>
-                      {% endfor %}
-                      </tbody>
+                        {% endfor %}
+                        </tbody>
                     </table>
-    <table class="table table-borderless">
-    <thead>
-      <tr>
-        <th><a type="button" class="btn btn-info" style="font-size: 20px;" href="#"><b>Buy</b></a></th>
-        <th>Total price:</th>
-        <th style="font-size: 15px;">{{ cart.get_total_price }}$</th>
-      </tr>
-    </thead>
-    </table>
+                    <table class="table table-borderless">
+                        <thead>
+                        <tr>
+                            <th><a type="button" class="btn btn-info" style="font-size: 20px;" href="#"><b>Buy</b></a>
+                            </th>
+                            <th>Total price:</th>
+                            <th style="font-size: 15px;">{{ cart.get_total_price }}$</th>
+                        </tr>
+                        </thead>
+                    </table>
                 </div>
-               </div>
-              <a type="button"
-                 class="btn btn-outline-light me-2"
-                 data-bs-toggle="popover"
-                 data-bs-placement="bottom"
-                 id="cart"
-              >Cart <span class="badge bg-danger">{{ cart.get_total_quantity }}</span>
-              </a>
-              {% endif %}
+            </div>
+            <a type="button"
+               class="btn btn-outline-light me-4"
+               data-bs-toggle="popover"
+               data-bs-placement="bottom"
+               id="cart"
+               style="width:7%;height:70px;border:none;">
+            <img src="cart/img_cart.png" width="80%" height="50px"><span class="badge bg-danger">{{ cart.get_total_quantity }}</span>
+            </a>
+            {% endif %}
             <div class="text-end">
                 {% if user.is_authenticated %}
-                <span class="px-4 text-white">Hello, {{ user.username }}!</span> <a type="button" class="btn btn-outline-light me-2" href="{% url 'logout' %}">Logout</a>
+                <span class="px-4 text-white">Hello, {{ user.username }}!</span> <a type="button"
+                                                                                    class="btn btn-outline-light me-2"
+                                                                                    href="{% url 'logout' %}">Logout</a>
                 {% else %}
-              <a type="button" class="btn btn-outline-light me-2" href="{% url 'login' %}">Sing in</a>
-              <a type="button" class="btn btn-warning" href="{% url 'signup' %}">Registration</a>
+                <a type="button" class="btn btn-outline-light me-2" href="{% url 'login' %}">Sing in</a>
+                <a type="button" class="btn btn-warning" href="{% url 'signup' %}">Registration</a>
                 {% endif %}
             </div>
-          </div>
         </div>
-    </header>
-    {% block content %}{% endblock %}
+    </div>
+</header>
+{% block content %}{% endblock %}
+<footer class="footer">
+
+</footer>
 <script type='text/javascript'>
   $(document).ready(function() {
 
@@ -94,6 +113,10 @@
   var exampleEl = document.getElementById('cart')
   var popover = new bootstrap.Popover(exampleEl, options)
   })
+
+
+
+
 </script>
 </body>
 </html>

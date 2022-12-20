@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from .views import IndexView, BookView, AuthorsView, AuthorView, GenresView, GenreView, SearchView
 
+
 # '' - домашняя страница
 # books/ - список всех книг
 # authors/ - список всех авторов

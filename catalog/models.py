@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
+
 class Genre(models.Model):
     name = models.CharField(max_length=50)
     image = models.ImageField(upload_to='genres/', blank=True, default='image-placeholder.jpg')
@@ -25,6 +26,7 @@ class Author(models.Model):
     def get_author_url(self):
         return reverse('catalog-author', args=[self.first_name, self.last_name])
 
+
 class Book(models.Model):
     title = models.CharField(max_length=100)
     author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True)
@@ -38,7 +40,7 @@ class Book(models.Model):
         return self.title
 
     def display_genre(self):
-        return ', '.join([genre.name for genre in self.genre.all()]) 
+        return ', '.join([genre.name for genre in self.genre.all()])
 
     def get_book_url(self):
         return reverse('catalog-book', args=[self.id])
@@ -47,8 +49,3 @@ class Book(models.Model):
         return reverse('cart-add', args=[self.id])
 
     display_genre.short_description = 'Genre'
-
-
-
-
-
