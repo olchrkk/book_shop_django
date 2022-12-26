@@ -123,7 +123,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-MEDIA_URL = '/source/'
+MEDIA_URL = 'source/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'source')
 
 # Default primary key field type

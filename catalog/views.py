@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from .models import Book, Author, Genre
 from cart.cart import get_cart
+from .genres import get_genres
 
 
 class IndexView(TemplateView):
@@ -17,7 +18,8 @@ class IndexView(TemplateView):
             'booksCount': booksCount,
             'authorsCount': authorsCount
         }
-        params = get_cart(request,params)
+        params = get_cart(request, params)
+        params = get_genres(request, params)
         return render(request, self.template_name, params)
 
 
@@ -30,7 +32,9 @@ class AuthorsView(TemplateView):
             'authors': authors
         }
         params = get_cart(request, params)
+        params = get_genres(request, params)
         return render(request, self.template_name, params)
+
 
 class BookView(TemplateView):
     template_name = 'catalog/book.html'
@@ -41,7 +45,9 @@ class BookView(TemplateView):
             'book': book
         }
         params = get_cart(request, params)
+        params = get_genres(request, params)
         return render(request, self.template_name, params)
+
 
 class AuthorView(TemplateView):
     template_name = 'catalog/index.html'
@@ -54,7 +60,9 @@ class AuthorView(TemplateView):
             'books': books
         }
         params = get_cart(request, params)
+        params = get_genres(request, params)
         return render(request, self.template_name, params)
+
 
 class GenresView(TemplateView):
     template_name = 'catalog/genres.html'
@@ -65,6 +73,7 @@ class GenresView(TemplateView):
             'genres': genres
         }
         params = get_cart(request, params)
+        params = get_genres(request, params)
         return render(request, self.template_name, params)
 
 
@@ -79,13 +88,15 @@ class GenreView(TemplateView):
             'books': books
         }
         params = get_cart(request, params)
+        params = get_genres(request, params)
         return render(request, self.template_name, params)
+
 
 class SearchView(TemplateView):
     template_name = 'catalog/index.html'
 
     def post(self, request):
-        content =request.POST["content"]
+        content = request.POST["content"]
         # search_author = Author.objects.get(first_name__icontent=content)
         books_by_title = Book.objects.filter(title__icontains=content)
         books_by_summary = Book.objects.filter(summary__icontains=content)
@@ -95,7 +106,5 @@ class SearchView(TemplateView):
             'books': result
         }
         params = get_cart(request, params)
+        params = get_genres(request, params)
         return render(request, self.template_name, params)
-
-
-

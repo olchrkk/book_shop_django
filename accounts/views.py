@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 from .forms import UserRegistrationForm
 from cart.models import Cart
 
+
 class RegistrationView(TemplateView):
     template_name = 'accounts/registration.html'
 

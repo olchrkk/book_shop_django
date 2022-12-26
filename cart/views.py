@@ -3,7 +3,8 @@ from django.views.generic import TemplateView
 from .models import Cart
 from catalog.models import Book
 from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import  login_required
+from django.contrib.auth.decorators import login_required
+
 
 class CartView(TemplateView):
 
@@ -13,8 +14,4 @@ class CartView(TemplateView):
         cart = Cart.objects.get(user=request.user)
         cart.products.add(book)
 
-
         return redirect('catalog-index')
-
-
-
