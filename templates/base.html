@@ -41,7 +41,7 @@
                     <a href="{% url 'catalog-genres' %}"><a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" style="color: white;">Genres</a></a>
                     <ul class="dropdown-menu">
                         {% for genre in genres %}
-                        <li><a class="dropdown-item" href="{{ genre.get_genre_url }}">{{genre}}</a></li>
+                        <li> <a class="dropdown-item" href="{{ genre.get_genre_url }}"> {{genre}}</a></li>
                         {% endfor %}
                     </ul>
                 </li>
